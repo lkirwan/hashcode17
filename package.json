@@ -1,22 +1,26 @@
 {
-  "name": "hashcode17",
-  "version": "1.0.0",
-  "description": "hashcode 2017",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lkirwan/hashcode17.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lkirwan/hashcode17/issues"
-  },
-  "homepage": "https://github.com/lkirwan/hashcode17#readme",
-  "devDependencies": {
-     "typescript": "^2.2.0"
-  }
+    "name": "hashcode17",
+    "version": "1.0.0",
+    "description": "hashcode 2017",
+    "main": "index.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "tsc && node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lkirwan/hashcode17.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/lkirwan/hashcode17/issues"
+    },
+    "homepage": "https://github.com/lkirwan/hashcode17#readme",
+    "devDependencies": {
+        "typescript": "^2.2.0"
+    },
+    "dependencies": {
+        "async-file": "^2.0.2"
+    }
 }
