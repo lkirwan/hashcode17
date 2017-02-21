@@ -2,10 +2,12 @@
     "name": "hashcode17",
     "version": "1.0.0",
     "description": "hashcode 2017",
-    "main": "index.ts",
+    "main": "./build/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "tsc && node index.js"
+        "clean": "rimraf build/*.*",
+        "tsc": "tsc && echo ok || echo not ok",
+        "build": "npm run clean && npm run tsc",
+        "start": "npm run build && node ./build/index.js"
     },
     "repository": {
         "type": "git",
@@ -18,6 +20,8 @@
     },
     "homepage": "https://github.com/lkirwan/hashcode17#readme",
     "devDependencies": {
+        "@types/node": "^7.0.5",
+        "tslint": "4.4.2",
         "typescript": "^2.2.0"
     },
     "dependencies": {

@@ -1,8 +1,8 @@
 {
+    "compileOnSave": true,
     "compilerOptions": {
         "target": "es6",
         "lib": ["es6", "dom"],
-        "types": [],
         "sourceMap": true,
         "module": "commonjs",
         "moduleResolution": "node",
@@ -16,6 +16,14 @@
         "noResolve": false,
         "noUnusedParameters": false,
         "noUnusedLocals": true,
-        "strictNullChecks": true
-    }
+        "strictNullChecks": true,
+        "outDir": "build"
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
 }

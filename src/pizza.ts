@@ -1,4 +1,4 @@
-class pizza {
+export class pizza {
 
  private blablabla: number;
  public filename: string;
