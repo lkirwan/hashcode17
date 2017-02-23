@@ -16,7 +16,7 @@ export class endpoint {
     public getNextRequest(): request {
         return this.requests.length > this.requestIndex
         ? this.requests[this.requestIndex]
-        : new request(0, new video(-1, 0));
+        : new request(0, new video(-1));
     }
 
 }
