@@ -67,6 +67,7 @@ let readFile = async (fileName: string): Promise<string> => {
             endpoints[i] = new endpoint();
         }
 
+
 //create rq (see below)
 
 //create cache
