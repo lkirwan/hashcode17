@@ -20,7 +20,8 @@ export class endpoint {
     }
 
 
-    constructor(  ) {
+    constructor(id: number ) {
+        this.id = id;
         this.latenciesGain = [];
         this.requests = [];
     }
