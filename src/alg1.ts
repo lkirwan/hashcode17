@@ -13,9 +13,11 @@ export class alg1 {
                 return b.time - a.time;
             });
             ep.requests.sort((a,b) => {
-                return a.count - b.count;
+                return b.count - a.count;
             });
         });
+
+// console.log(JSON.stringify(endpoints));
 
         this.endpoints = endpoints;
         this.caches = caches;
@@ -25,11 +27,13 @@ export class alg1 {
 
         //Getting the most requested video
         let requests = this.endpoints.map( (ep) => { return  { epId: ep.id, req: ep.getNextRequest() }; } )
-            .filter( (a) => { return a.req.count == 0 })
+            .filter( (a) => { return a.req.count > 0 })
             .sort((a,b) => {
-                return a.req.count - b.req.count;
+                return b.req.count - a.req.count;
             });
-        
+
+        // console.log(JSON.stringify(requests));
+
         if (requests.length > 0) {
             let mostRequest = requests[0];
 
@@ -39,9 +43,12 @@ export class alg1 {
                 return -1;
             }
 
+            // console.log(JSON.stringify(ep));
             //request matched!
             ep.requestIndex++;
             let video = mostRequest.req.video;
+
+// console.log (JSON.stringify(this.caches));
 
             for(let i=0; i< ep.latenciesGain.length; i++) {
 
@@ -51,6 +58,7 @@ export class alg1 {
                 //Search for the video in the cache
                 let videoInCache = cache.videos.find( (v) => { return (v.id == video.id); });
 
+                // console.log('v' + video.id + ' c ' + cache.id);
                 //If not found 
                 if (videoInCache == undefined) {
 
@@ -83,12 +91,11 @@ export class alg1 {
     public output = (): void => {
         let cacheUsed = this.caches.filter( (c) => { return c.videoSize() > 0; });
 
-        console.log(cacheUsed.length);
+         console.log(cacheUsed.length);
 
         cacheUsed.forEach( (c) => {
             console.log(c.id + ` ` + c.videos.map( (v) => { return v.id.toString() }) .reduce( (a,b) => { return a + ` ` + b; }));
         });
     }
 }
-//videos are in cache
 

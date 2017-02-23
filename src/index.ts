@@ -66,7 +66,7 @@ let readFile = async (fileName: string): Promise<string> => {
 
         let lineCount = 2;
 
-        for (; lineCount < endpointCount + 2; lineCount++) {
+        for (let i =0; lineCount < endpointCount + 2; i++, lineCount++) {
 
             //read file line 3 (sample: 1000 3)
             // dataByLine = inputFileContents.split('\n');
@@ -74,42 +74,44 @@ let readFile = async (fileName: string): Promise<string> => {
             let endpointLatency = parseInt(dataLineBySpace[0]);
             let endpointCacheCount = parseInt(dataLineBySpace[1]);
 
-            lineCount++
+            lineCount++;
             for (let j = 0; j < endpointCacheCount; j++, lineCount++) {
 
                 //read next line (sample: 0 100)
                 // dataByLine = inputFileContents.split('\n');
                 dataLineBySpace = dataByLine[lineCount].split(' ');
-                console.log(dataLineBySpace);
+                // console.log(dataLineBySpace);
                 let cacheId = parseInt(dataLineBySpace[0]);
                 let cacheLatency = parseInt(dataLineBySpace[1]);
 
                 //create latency
-                endpoints[lineCount].latenciesGain[j] = new latency(endpointLatency - cacheLatency, caches[cacheId]);
+                endpoints[i].latenciesGain[j] = new latency(endpointLatency - cacheLatency, caches[cacheId]);
             }
         }
 
 
 
 //create rq
-        for (let i = 2; i < 2 + requestCount; i++) {
+        for (let i=0; lineCount < dataByLine.length; i++, lineCount++) {
 
             //read all remaining lines (should equal requestCount)
             // (sample: 3 0 1500) 1500 requests for video 3 coming from endpoint 0.
 
             //dataByLine = inputFileContents.split('\n');
-            dataLineBySpace = dataByLine[i].split(' ');
+            dataLineBySpace = dataByLine[lineCount].split(' ');
             let requestVideoId = parseInt(dataLineBySpace[0]);
             let requestEndpointId = parseInt(dataLineBySpace[1]);
             let requestVideoCount = parseInt(dataLineBySpace[2]);
 
-            console.log(dataByLine);
+            // console.log(dataByLine);
             // console.log(endpoints);
-            console.log(requestEndpointId);
+            // console.log(requestEndpointId);
             endpoints[requestEndpointId].requests.push(new request(requestVideoCount, videos[requestVideoId]));
         }
 
     // }
+
+// console.log(endpoints);
 
 
 let sol = new alg1(endpoints, caches);
