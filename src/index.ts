@@ -43,12 +43,8 @@ let endpoints = [];
 for (var i = 0; i < endpointCount; i++) {
     endpoints[i] = new endpoint();
 }
-//
-// //create rq
-// let requests = [];
-// for (var i = 0; i < requestCount; i++) {
-//     requests[i] = new request();
-// }
+
+//create rq (see below)
 
 //create cache
 let caches = [];
