@@ -1,10 +1,12 @@
+import { cache } from './cache';
 import { endpoint } from './endpoint';
 
 export class alg1 {
 
     public endpoints: endpoint[];
+    public caches: cache[];
 
-    constructor(endpoints: endpoint[]) {
+    constructor(endpoints: endpoint[], caches: cache[]) {
 
         endpoints.forEach( (ep) => {
             ep.latenciesGain.sort((a,b) => {
@@ -16,6 +18,7 @@ export class alg1 {
         });
 
         this.endpoints = endpoints;
+        this.caches = caches;
     }
 
     getMostRequestedVideo = (): number => {
@@ -75,7 +78,16 @@ export class alg1 {
      
         while (this.getMostRequestedVideo() >= 0) {
         }
+    }
 
+    public output = (): void => {
+        let cacheUsed = this.caches.filter( (c) => { return c.videoSize() > 0; });
+
+        console.log(cacheUsed.length);
+
+        cacheUsed.forEach( (c) => {
+            console.log(c.id + ` ` + c.videos.map( (v) => { return v.id.toString() }) .reduce( (a,b) => { return a + ` ` + b; }));
+        });
     }
 }
 //videos are in cache
