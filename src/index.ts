@@ -6,31 +6,10 @@ import * as fs from 'async-file';
 import {endpoint} from "./endpoint";
 import {request} from "./request";
 
-let readFileSync = (fileName: string): string => {
-    let data = '';
-    try {
-        (async () => {
-            data = await fs.readTextFile(fileName); 
-        })
-    } catch (asd) {
-        console.log (asd);
-    }
-    
-    return data;
-}
 
 let readFile = async (fileName: string): Promise<string> => {
     return await fs.readTextFile(fileName); 
 }
-
-
-
-
-
-
-
-//init ep
-//init rq
 
 
 (async function () {
@@ -77,33 +56,29 @@ let readFile = async (fileName: string): Promise<string> => {
         }
 
 //read file line 2 (sample: 50 50 80 30 110)
-        let videoSizes = [50, 50, 80, 30, 110];
+        dataByLine = inputFileContents.split('\n');
+        let videoSizes = dataByLine[i].split(' ');
 
 //init video
         for (var i = 0; i < videos.length; i++) {
-            videos[i].size = videoSizes[i];
+            videos[i].size = parseInt(videoSizes[i]);
         }
 
         for (var i = 0; i < endpointCount; i++) {
 
             //read file line 3 (sample: 1000 3)
-            let endpointLatency = 1000;
-            let endpointCacheCount = 3;
-            //read file line 7 (sample: 500 0)
-            // let endpointLatency = 500;
-            // let endpointCacheCount = 0;
+            dataByLine = inputFileContents.split('\n');
+            dataLineBySpace = dataByLine[i].split(' ');
+            let endpointLatency = parseInt(dataLineBySpace[0]);
+            let endpointCacheCount = parseInt(dataLineBySpace[1]);
 
             for (var j = 0; j < endpointCacheCount; j++) {
 
                 //read next line (sample: 0 100)
-                let cacheId = 0;
-                let cacheLatency = 100;
-                //read next line (sample: 2 200)
-                // let cacheId = 2;
-                // let latency = 200;
-                //read next line (sample: 1 300)
-                // let cacheId = 1;
-                // let latency = 300;
+                dataByLine = inputFileContents.split('\n');
+                dataLineBySpace = dataByLine[i].split(' ');
+                let cacheId = parseInt(dataLineBySpace[0]);
+                let cacheLatency = parseInt(dataLineBySpace[1]);
 
                 //create latency
                 endpoints[i].latenciesGain[j] = new latency(endpointLatency - cacheLatency, caches[cacheId]);
@@ -117,12 +92,12 @@ let readFile = async (fileName: string): Promise<string> => {
 
             //read all remaining lines (should equal requestCount)
             // (sample: 3 0 1500) 1500 requests for video 3 coming from endpoint 0.
-            let requestVideoId = 3;
-            let requestEndpointId = 0;
-            let requestVideoCount = 1500;
-            // (sample: 0 1 1000)
-            // (sample: 4 0 500)
-            // (sample: 1 0 1000)
+
+            dataByLine = inputFileContents.split('\n');
+            dataLineBySpace = dataByLine[i].split(' ');
+            let requestVideoId = parseInt(dataLineBySpace[0]);
+            let requestEndpointId = parseInt(dataLineBySpace[1]);
+            let requestVideoCount = parseInt(dataLineBySpace[2]);
 
             endpoints[requestEndpointId].requests.push(new request(requestVideoCount, videos[requestVideoId]));
         }
