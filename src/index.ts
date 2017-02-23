@@ -1,3 +1,7 @@
+import { latency } from './latency';
+import { video } from './video';
+import { cache } from './cache';
+import { datacenter } from './datacenter';
 import * as fs from 'async-file';
 import { pizza } from './pizza';
 
@@ -17,6 +21,18 @@ let readFileSync = (fileName: string): string => {
 let readFile = async (fileName: string): Promise<string> => {
     return await fs.readTextFile(fileName); 
 }
+
+let dc = new datacenter();
+//opening the file
+//create videos and putting in the dc
+//create ep
+//create rq
+//create cache
+//init video
+//create latency
+//init ep
+//init rq
+
 
 let p = new pizza(12,"ss");
 p.filename;
