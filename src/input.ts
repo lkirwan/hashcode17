@@ -7,20 +7,23 @@ import * as fs from 'fs';
 
 export class input {
     private filename: string;
-    private fileLines: string[];
+    private fileLines: string[] = [];
 
     private videosCount: number;
-    private videos: video[];
+    private videos: video[] = [];
 
     private endpointsCount: number;
-    private endpoints: endpoint[];
+    public endpoints: endpoint[] = [];
     
     private requestsCount: number;
 
+    public cacheSize: number;
     private cachesCount: number;
-    private caches: cache[];
+    public caches: cache[] = [];
 
     constructor(filename: string) {
+        this.filename = filename;
+
         this.read();
 
         let lineNumber = this.parse1stLine();
@@ -31,7 +34,7 @@ export class input {
 
     private read(): void {
         let fileContent = fs.readFileSync(this.filename);
-        this.fileLines = fileContent.toString().split('/n');
+        this.fileLines = fileContent.toString().split('\n');
     }
 
     private parseLine(line: string): number[] {
@@ -39,21 +42,23 @@ export class input {
     }
 
     private parse1stLine(): number {
-        let [ videosCount, endpointsCount, requestsCount, cachesCount, cacheMaxSize ] = this.parseLine( this.fileLines[0] );
+        let [ videosCount, endpointsCount, requestsCount, cachesCount, cacheSize ] = this.parseLine( this.fileLines[0] );
         
         this.videosCount = videosCount;
         this.endpointsCount = endpointsCount;
         this.requestsCount = requestsCount;
         this.cachesCount = cachesCount;
+        this.cacheSize = cacheSize;
 
         for (let i=0; i<cachesCount; i++){
-            this.caches[i] = new cache(i,cacheMaxSize);
+            this.caches[i] = new cache(i,cacheSize);
         }
 
         return 1;
     }
 
     private parseVideos(lineNumber: number): number {
+
         let lineData = this.parseLine( this.fileLines[lineNumber++] );
 
         lineData.forEach(
