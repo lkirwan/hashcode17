@@ -100,4 +100,9 @@ export class input {
 
         return lineNumber;
     }
+
+
+    get getFileLines(): string[] {
+        return this.fileLines;
+    }
 }
