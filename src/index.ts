@@ -1,23 +1,27 @@
 import { alg1 } from './alg1';
 import { input } from "./input";
+import {output} from "./output";
+import * as stopwatch from 'timer-stopwatch';
+
+const NAME = 'kittens';
+const INPUT_FILE_NAME = './data/' + NAME + '.in';
+const OUTPUT_FILE_NAME = './data/' + NAME + '.out';
 
 
 (async function () {
 
-    let inputFileContents = new input('./data/sample.in');
+    let timer = new stopwatch();
+
+    timer.start();
+    console.log("~~~ read from file: "+ INPUT_FILE_NAME);
+    let inputFileContents = new input(INPUT_FILE_NAME);
+    console.log('total time: ' + timer.ms + ' ms');
 
     let sol = new alg1(inputFileContents.endpoints, inputFileContents.caches);
     sol.compute();
-    sol.output();
+    console.log("~~~ write to file: " + OUTPUT_FILE_NAME);
+    new output(OUTPUT_FILE_NAME, sol.output());
+    timer.stop();
+    console.log('total time: ' + timer.ms + ' ms');
 
-
-    // var data = await fs.readTextFile('./data/small.in');
-    //
-    // console.log(data.split('\n'));
-    //
-    // await fs.appendFile("./data/small.out", data, { flag: "w+"})
-    // // await fs.rename('/tmp/hello', '/tmp/world');
-    // // await fs.access('/etc/passd', fs.constants.R_OK | fs.constants.W_OK);
-    // // await fs.appendFile('message.txt', data);
-    // // await fs.unlink('/tmp/hello');
 })();
