@@ -91,12 +91,9 @@ export class alg1 {
     public output = (): string[] => {
         let cacheUsed = this.caches.filter( (c) => { return c.videoSize() > 0; });
 
-         // console.log('cacheUsed.length:' + cacheUsed.length);
-
-        let outputLines:string[] = [];
+        let outputLines:string[] = [cacheUsed.length.toString()];
         cacheUsed.forEach( (c) => {
             let items = c.id + ` ` + c.videos.map( (v) => { return v.id.toString() }) .reduce( (a, b) => { return a + ` ` + b; });
-            // console.log('items: ' + items);
             outputLines.push(items);
         });
 
