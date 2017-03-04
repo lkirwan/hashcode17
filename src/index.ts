@@ -3,7 +3,8 @@ import { input } from "./input";
 import {output} from "./output";
 import * as stopwatch from 'timer-stopwatch';
 
-const NAME = 'kittens';
+const NAME = 'sample';
+
 const INPUT_FILE_NAME = './data/' + NAME + '.in';
 const OUTPUT_FILE_NAME = './data/' + NAME + '.out';
 
