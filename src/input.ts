@@ -3,7 +3,7 @@ import { latency } from './latency';
 import { request } from './request';
 import { endpoint } from './endpoint';
 import { video } from './video';
-import * as fs from 'fs';
+import * as fs from "fs";
 
 export class input {
     private filename: string;
@@ -14,7 +14,7 @@ export class input {
 
     private endpointsCount: number;
     public endpoints: endpoint[] = [];
-    
+
     private requestsCount: number;
 
     public cacheSize: number;
@@ -34,16 +34,16 @@ export class input {
 
     private read(): void {
         let fileContent = fs.readFileSync(this.filename);
-        this.fileLines = fileContent.toString().split('\n');
+        this.fileLines = fileContent.toString().split("\n");
     }
 
     private parseLine(line: string): number[] {
-        return line.split(' ').map( (v) => { return parseInt(v); });
+        return line.split(" ").map( (v) => { return parseInt(v); });
     }
 
     private parse1stLine(): number {
         let [ videosCount, endpointsCount, requestsCount, cachesCount, cacheSize ] = this.parseLine( this.fileLines[0] );
-        
+
         this.videosCount = videosCount;
         this.endpointsCount = endpointsCount;
         this.requestsCount = requestsCount;
@@ -65,15 +65,15 @@ export class input {
             (size, i) => {
                 this.videos.push(new video(i, size));
             }
-        )
-        
+        );
+
         return lineNumber;
     }
 
     private parseEndpoints(lineNumber: number): number {
 
         for (let ep = 0; ep < this.endpointsCount; ep++) {
-            
+
             let newEndpoint = new endpoint(ep);
 
             let [endpointLatency, endpointCaches] = this.parseLine( this.fileLines[lineNumber++] );
@@ -90,7 +90,7 @@ export class input {
     }
 
     private parseRequests(lineNumber: number): number {
-        
+
         for (let rq = 0; rq < this.requestsCount; rq++) {
 
             let [videoId, endpointId, requestCount] = this.parseLine( this.fileLines[lineNumber++] );

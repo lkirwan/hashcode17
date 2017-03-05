@@ -1,4 +1,4 @@
-import { video } from './video';
+import { video } from "./video";
 
 export class datacenter {
     public id: number;

@@ -1,4 +1,4 @@
-import { datacenter } from './datacenter';
+import { datacenter } from "./datacenter";
 
 export class cache extends datacenter {
     public maxsize: number;

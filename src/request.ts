@@ -1,6 +1,6 @@
-import { video } from './video';
+import { video } from "./video";
 
-export class request 
+export class request
 {
     public count: number;
     public video: video;

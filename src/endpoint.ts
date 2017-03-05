@@ -1,6 +1,6 @@
-import { video } from './video';
-import { request } from './request';
-import { latency } from './latency';
+import { video } from "./video";
+import { request } from "./request";
+import { latency } from "./latency";
 
 export class endpoint {
     public id: number;

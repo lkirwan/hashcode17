@@ -1,12 +1,12 @@
-import 'mocha';
+import "mocha";
 import {alg1} from "../src/alg1";
 import {cache} from "../src/cache";
-import {expect} from 'chai';
+import {expect} from "chai";
 import {endpoint} from "../src/endpoint";
 
 
 
-describe('Test alg1 processes content as expected', () => {
+describe("Test alg1 processes content as expected", () => {
 
     let endpoints = [   new endpoint(0) ];
     // TODO: populate 'endpoints' with the following:
@@ -17,9 +17,9 @@ describe('Test alg1 processes content as expected', () => {
                     new cache(2, 100)];
     let alg = new alg1(endpoints, caches);
 
-    it ('Verify output function returns expected content', () => {
+    it ("Verify output function returns expected content", () => {
         // let expectedResult = [ '1', '0 3 1' ];
-        let expectedResult = [ '0' ];
+        let expectedResult = [ "0" ];
         expect(alg.output()).to.eql(expectedResult);
     });
 

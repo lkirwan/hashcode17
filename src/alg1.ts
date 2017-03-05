@@ -1,5 +1,5 @@
-import { cache } from './cache';
-import { endpoint } from './endpoint';
+import { cache } from "./cache";
+import { endpoint } from "./endpoint";
 
 export class alg1 {
 
@@ -25,9 +25,9 @@ export class alg1 {
 
     getMostRequestedVideo = (): number => {
 
-        //Getting the most requested video
+        // getting the most requested video
         let requests = this.endpoints.map( (ep) => { return  { epId: ep.id, req: ep.getNextRequest() }; } )
-            .filter( (a) => { return a.req.count > 0 })
+            .filter( (a) => { return a.req.count > 0; })
             .sort((a,b) => {
                 return b.req.count - a.req.count;
             });
@@ -37,14 +37,14 @@ export class alg1 {
         if (requests.length > 0) {
             let mostRequest = requests[0];
 
-            let ep = this.endpoints.find( (ep) => { return (ep.id == mostRequest.epId) });
-            if (ep == undefined) {
-                //Should not happend
+            let ep = this.endpoints.find( (ep) => { return (ep.id === mostRequest.epId) });
+            if (ep === undefined) {
+                // should not happend
                 return -1;
             }
 
             // console.log(JSON.stringify(ep));
-            //request matched!
+            // request matched!
             ep.requestIndex++;
             let video = mostRequest.req.video;
 
@@ -52,27 +52,27 @@ export class alg1 {
 
             for(let i=0; i< ep.latenciesGain.length; i++) {
 
-                //Check the cache
+                // check the cache
                 let cache = ep.latenciesGain[i].source;
 
-                //Search for the video in the cache
-                let videoInCache = cache.videos.find( (v) => { return (v.id == video.id); });
+                // search for the video in the cache
+                let videoInCache = cache.videos.find( (v) => { return (v.id === video.id); });
 
                 // console.log('v' + video.id + ' c ' + cache.id);
-                //If not found 
-                if (videoInCache == undefined) {
+                // if not found
+                if (videoInCache === undefined) {
 
-                    //Check if it could be cached
-                    if (cache.remainingSpace() >= video.size) 
+                    // check if it could be cached
+                    if (cache.remainingSpace() >= video.size)
                     {
                         cache.videos.push(video);
                     } else {
-                        //if not search for another cache
+                        // if not search for another cache
                         continue;
                     }
                 }
 
-                //If found and no caccontinue whit the next request
+                // if found and no caccontinue whit the next request
                 return 1;
             }
 
@@ -83,9 +83,8 @@ export class alg1 {
     }
 
     public compute = (): void => {
-     
-        while (this.getMostRequestedVideo() >= 0) {
-        }
+
+        while (this.getMostRequestedVideo() >= 0) { }
     }
 
     public output = (): string[] => {
@@ -93,7 +92,7 @@ export class alg1 {
 
         let outputLines:string[] = [cacheUsed.length.toString()];
         cacheUsed.forEach( (c) => {
-            let items = c.id + ` ` + c.videos.map( (v) => { return v.id.toString() }) .reduce( (a, b) => { return a + ` ` + b; });
+            let items = `${c.id}  ` + c.videos.map( (v) => { return v.id.toString(); }) .reduce( (a, b) => { return `${a} ${b}`; });
             outputLines.push(items);
         });
 
