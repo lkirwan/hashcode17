@@ -1,6 +1,9 @@
-import { datacenter } from "./datacenter";
+import { video } from "./video";
 
-export class cache extends datacenter {
+export class cache {
+    public id: number;
+    public videos: video[] = [];
+
     public maxsize: number;
 
     public videoSize(): number {
@@ -12,7 +15,6 @@ export class cache extends datacenter {
     }
 
     constructor(id: number, maxsize:number) {
-        super();
         this.id = id;
         this.maxsize= maxsize;
     }
