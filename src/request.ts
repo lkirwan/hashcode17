@@ -8,6 +8,6 @@ export class request {
     constructor(count: number, video: video) {
         this.count = count;
         this.video = video;
-        this.videoId = video.id
+        this.videoId = video.id;
     }
 }

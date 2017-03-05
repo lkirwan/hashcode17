@@ -90,5 +90,5 @@ export class alg1 {
 
          return this.caches;
     }
-    
+
 }

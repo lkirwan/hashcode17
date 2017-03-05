@@ -1,5 +1,5 @@
-import { latency } from './latency';
-import { video } from './video';
+import { latency } from "./latency";
+import { video } from "./video";
 import { endpoint } from "./endpoint";
 import { cache } from "./cache";
 
@@ -24,7 +24,7 @@ export class alg2 {
 
       private getRandomVideoIdNoInList(videos: video[]) {
 
-        let videoIds = videos.map( (v) => { return v.id});
+        let videoIds = videos.map( (v) => { return v.id;});
 
         let randomVideoId = this.getRandomVideoId();
 
@@ -39,10 +39,10 @@ export class alg2 {
         let remainingSpace: number = maxSize;
 
         let newCache = new cache(cacheId, maxSize);
-        
+
         let videoId = this.getRandomVideoIdNoInList(newCache.videos);
         let chosenVideo = this.videos[videoId];
-        
+
         while (remainingSpace >= chosenVideo.size) {
           remainingSpace -= chosenVideo.size;
           newCache.videos.push(chosenVideo);
@@ -51,7 +51,7 @@ export class alg2 {
           videoId = this.getRandomVideoIdNoInList(newCache.videos);
           chosenVideo = this.videos[videoId];
         }
-        
+
         return newCache;
       }
 
@@ -70,19 +70,19 @@ export class alg2 {
 
           // console.log(this.caches);
 
-          population[p] = this.caches.map( (c) => { return this.getRandomCache(c.id, c.maxsize) } );
+          population[p] = this.caches.map( (c) => { return this.getRandomCache(c.id, c.maxsize); } );
 
           // console.log('Element ' + p + ' ' + JSON.stringify(population[p]));
 
           fitness[p] = this.solutionFitness(population[p]);
-          
-          // console.log('Fitness: ' + JSON.stringify(fitness[p]));   
+
+          // console.log('Fitness: ' + JSON.stringify(fitness[p]));
         }
 
         for(let g=0; g<generations; g++) {
 
           console.log("generation: " + g);
-          //find the min fitness value
+          // find the min fitness value
           let fitnessSorted = fitness.slice(0).sort( (a,b) => {return a - b;});
           let medianFitness = fitnessSorted[Math.floor(populationSize/2)-1];
 
@@ -93,7 +93,7 @@ export class alg2 {
           let newFitness: number[] = [];
 
           while (newPopulation.length < populationSize) {
-            
+
             // selecting the parents
             let parents = population.filter( (p, i) => {
               return fitness[i] >= medianFitness;
@@ -114,9 +114,9 @@ export class alg2 {
                 parent2 = parents[parentId2];
 
             let child1 = parent1.slice(0, cutFrom).concat(parent2.slice(cutFrom)),
-                child2 = parent2.slice(0, cutFrom).concat(parent1.slice(cutFrom));          
-            
-            if (mutation++ % 50 == mutationRate) {
+                child2 = parent2.slice(0, cutFrom).concat(parent1.slice(cutFrom));
+
+            if (mutation++ % 50 === mutationRate) {
               let cache1IdMutated = Math.floor(Math.random() * child1.length);
               child1[cache1IdMutated] = this.getRandomCache(cache1IdMutated, this.cacheMaxSize);
 
@@ -149,13 +149,13 @@ export class alg2 {
       private endpointFitness(ep: endpoint, caches: cache[]): number {
         let fit = ep.requests.map( (r) => {
 
-          //console.log(ep);
+          // console.log(ep);
 
           let linkedCaches = ep.latenciesGain.map( (lg) => {
-            //console.log("cacheId " + lg.cacheId + JSON.stringify(caches));
+            // console.log("cacheId " + lg.cacheId + JSON.stringify(caches));
             return caches[lg.cacheId];
-          })
-          //console.log ("linkedCaches :" + JSON.stringify(linkedCaches));
+          });
+          // console.log ("linkedCaches :" + JSON.stringify(linkedCaches));
 
           let videoCaches = this.videoInCache(r.video.id, linkedCaches);
 
@@ -185,5 +185,5 @@ export class alg2 {
         });
 
         return fit;
-      }   
+      }
 }

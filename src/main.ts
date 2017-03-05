@@ -1,5 +1,5 @@
-import { video } from './video';
-import { alg2 } from './alg2';
+import { video } from "./video";
+import { alg2 } from "./alg2";
 import { endpoint } from "./endpoint";
 import { cache } from "./cache";
 import { input } from "./input";
