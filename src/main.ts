@@ -27,6 +27,6 @@ alg.output();
 */
 
 let alg = new alg2(endpoints, videos, caches, cacheSize);
-let solution = alg.compute(2, 1, 5);
+let solution = alg.compute(200, 50, 5);
 
 new output(OUTPUT_FILE_NAME, solution);
