@@ -1,8 +1,8 @@
-import { cache } from './cache';
-import { latency } from './latency';
-import { request } from './request';
-import { endpoint } from './endpoint';
-import { video } from './video';
+import { cache } from "./cache";
+import { latency } from "./latency";
+import { request } from "./request";
+import { endpoint } from "./endpoint";
+import { video } from "./video";
 import * as fs from "fs";
 
 export class input {
@@ -38,7 +38,7 @@ export class input {
     }
 
     private parseLine(line: string): number[] {
-        return line.split(" ").map( (v) => { return parseInt(v); });
+        return line.split(" ").map( (v) => { return parseInt(v, 10); });
     }
 
     private parse1stLine(): number {
@@ -50,7 +50,7 @@ export class input {
         this.cachesCount = cachesCount;
         this.cacheSize = cacheSize;
 
-        for (let i=0; i<cachesCount; i++){
+        for (let i=0; i<cachesCount; i++) {
             this.caches[i] = new cache(i,cacheSize);
         }
 

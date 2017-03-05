@@ -37,7 +37,7 @@ export class alg1 {
         if (requests.length > 0) {
             let mostRequest = requests[0];
 
-            let ep = this.endpoints.find( (ep) => { return (ep.id === mostRequest.epId) });
+            let ep = this.endpoints.find( (ep) => { return (ep.id === mostRequest.epId); });
             if (ep === undefined) {
                 // should not happend
                 return -1;
@@ -63,8 +63,7 @@ export class alg1 {
                 if (videoInCache === undefined) {
 
                     // check if it could be cached
-                    if (cache.remainingSpace() >= video.size)
-                    {
+                    if (cache.remainingSpace() >= video.size) {
                         cache.videos.push(video);
                     } else {
                         // if not search for another cache
@@ -84,7 +83,9 @@ export class alg1 {
 
     public compute = (): void => {
 
-        while (this.getMostRequestedVideo() >= 0) { }
+        while (this.getMostRequestedVideo() >= 0) {
+            continue;
+         }
     }
 
     public output = (): string[] => {

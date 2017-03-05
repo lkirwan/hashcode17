@@ -40,3 +40,9 @@ jspm_packages
 # Typescript
 *.js
 *.js.map
+
+# VS Code
+.vscode
+
+# Output files
+data/*.out

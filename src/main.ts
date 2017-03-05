@@ -1,9 +1,9 @@
-import { endpoint } from './endpoint';
-import { cache } from './cache';
-import { alg1 } from './alg1';
-import { input } from './input';
+import { endpoint } from "./endpoint";
+import { cache } from "./cache";
+import { alg1 } from "./alg1";
+import { input } from "./input";
 
-let inputData = new input('./data/kittens.in');
+let inputData = new input("./data/kittens.in");
 
 let caches: cache[] = inputData.caches;
 // let cacheSize = inputData.cacheSize;

@@ -5,10 +5,8 @@ import { latency } from "./latency";
 export class endpoint {
     public id: number;
 
-    //sorted
     public latenciesGain: latency[];
 
-    //sorted
     public requests: request[];
 
     public requestIndex: number = 0;
