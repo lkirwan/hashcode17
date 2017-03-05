@@ -5,10 +5,13 @@ import { cache } from "./cache";
 import { input } from "./input";
 import { output } from "./output";
 
-const NAME = "me_at_the_zoo";
+// npm run main -- me_at_the_zoo
+let args = process.argv.slice(2);
 
-const INPUT_FILE_NAME = `./data/${NAME}.in`;
-const OUTPUT_FILE_NAME = `./data/${NAME}.out`;
+let name = args[0] || "sample";
+
+let INPUT_FILE_NAME = `./data/${name}.in`;
+let OUTPUT_FILE_NAME = `./data/${name}.out`;
 
 let inputData = new input(INPUT_FILE_NAME);
 
@@ -24,6 +27,6 @@ alg.output();
 */
 
 let alg = new alg2(endpoints, videos, caches, cacheSize);
-let solution = alg.compute(200, 50, 5);
+let solution = alg.compute(2, 1, 5);
 
 new output(OUTPUT_FILE_NAME, solution);
