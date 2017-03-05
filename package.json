@@ -24,8 +24,8 @@
         "@types/chai": "^3.4.35",
         "@types/mocha": "^2.2.39",
         "@types/node": "^7.0.5",
-        "tslint": "4.4.2",
-        "typescript": "^2.2.0"
+        "tslint": "^4.5.1",
+        "typescript": "^2.2.1"
     },
     "dependencies": {
         "async-file": "^2.0.2",
