@@ -1,11 +1,9 @@
-import { cache } from './cache';
-
 export class latency {
-    public time: number;
-    public source: cache;
+    public readonly time: number;
+    public readonly cacheId: number;
 
-    constructor(time: number, source: cache) {
+    constructor(time: number, cacheId: number) {
         this.time = time;
-        this.source = source;
+        this.cacheId = cacheId;
     }
 }

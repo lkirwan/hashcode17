@@ -17,7 +17,6 @@ export class endpoint {
         : new request(0, new video(-1));
     }
 
-
     constructor(id: number ) {
         this.id = id;
         this.latenciesGain = [];

@@ -12,7 +12,7 @@ export class input {
     private fileLines: string[] = [];
 
     private videosCount: number;
-    private videos: video[] = [];
+    public videos: video[] = [];
 
     private endpointsCount: number;
     public endpoints: endpoint[] = [];
@@ -82,7 +82,7 @@ export class input {
 
             for (let endpointCache = 0; endpointCache < endpointCaches; endpointCache++) {
                 let [cacheId, cacheLatency] = this.parseLine( this.fileLines[lineNumber++] );
-                newEndpoint.latenciesGain.push(new latency(endpointLatency-cacheLatency, this.caches[cacheId]));
+                newEndpoint.latenciesGain.push(new latency(endpointLatency-cacheLatency, cacheId));
             }
 
             this.endpoints[ep] = newEndpoint;

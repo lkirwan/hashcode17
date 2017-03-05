@@ -53,8 +53,9 @@ export class alg1 {
             for(let i=0; i< ep.latenciesGain.length; i++) {
 
                 // check the cache
-                let cache = ep.latenciesGain[i].source;
+                let cacheId = ep.latenciesGain[i].cacheId;
 
+                let cache = this.caches[cacheId];
                 // search for the video in the cache
                 let videoInCache = cache.videos.find( (v) => { return (v.id === video.id); });
 
@@ -81,23 +82,13 @@ export class alg1 {
         return -1;
     }
 
-    public compute = (): void => {
+    public compute = (): cache[] => {
 
         while (this.getMostRequestedVideo() >= 0) {
             continue;
          }
+
+         return this.caches;
     }
-
-    public output = (): string[] => {
-        let cacheUsed = this.caches.filter( (c) => { return c.videoSize() > 0; });
-
-        let outputLines:string[] = [cacheUsed.length.toString()];
-        cacheUsed.forEach( (c) => {
-            let items = `${c.id}  ` + c.videos.map( (v) => { return v.id.toString(); }) .reduce( (a, b) => { return `${a} ${b}`; });
-            outputLines.push(items);
-        });
-
-        return outputLines;
-    }
+    
 }
-

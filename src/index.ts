@@ -18,9 +18,9 @@ const OUTPUT_FILE_NAME = `./data/${NAME}.out`;
     console.log(`total time: ${timer.ms} ms`);
 
     let sol = new alg1(inputFileContents.endpoints, inputFileContents.caches);
-    sol.compute();
+    let solution = sol.compute();
     console.log(`~~~ write to file: ${OUTPUT_FILE_NAME}`);
-    new output(OUTPUT_FILE_NAME, sol.output());
+    new output(OUTPUT_FILE_NAME, solution);
     timer.stop();
     console.log(`total time: ${timer.ms} ms`);
 })();
