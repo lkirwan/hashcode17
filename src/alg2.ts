@@ -52,7 +52,7 @@ export class alg2 {
         return newCache;
       }
 
-      public compute(populationSize: number, generations: number): cache[] {
+      public compute(populationSize: number, generations: number, mutationRate: number): cache[] {
 
         if (populationSize < 2) {
           throw "Population too low";
@@ -60,9 +60,13 @@ export class alg2 {
 
         let population: cache[][] = [];
         let fitness: number[] = [];
+        let mutation: number = 0;
 
         // first generation
         for(let p=0; p< populationSize; p++) {
+
+          // console.log(this.caches);
+
           population[p] = this.caches.map( (c) => { return this.getRandomCache(c.id, c.maxsize) } );
 
           // console.log('Element ' + p + ' ' + JSON.stringify(population[p]));
@@ -110,6 +114,14 @@ export class alg2 {
             let child1 = parent1.slice(0, cutFrom).concat(parent2.slice(cutFrom)),
                 child2 = parent2.slice(0, cutFrom).concat(parent1.slice(cutFrom));          
             
+            if (mutation++ % 50 == mutationRate) {
+              let cache1IdMutated = Math.floor(Math.random() * child1.length);
+              child1[cache1IdMutated] = this.getRandomCache(cache1IdMutated, this.cacheMaxSize);
+
+              let cache2IdMutated = Math.floor(Math.random() * child2.length);
+              child2[cache2IdMutated] = this.getRandomCache(cache2IdMutated, this.cacheMaxSize);
+            }
+
             let fit1 = this.solutionFitness(child1),
                 fit2 = this.solutionFitness(child2);
 
@@ -124,11 +136,6 @@ export class alg2 {
 
         let maxFitness = Math.max(...fitness);
         let maxFitnessId = fitness.indexOf(maxFitness);
-
-        console.log("final Fitness: " + maxFitness);
-        console.log("final Fitness ID: " + maxFitnessId);
-        
-        console.log(population[maxFitnessId]);
 
         return population[maxFitnessId];
       }

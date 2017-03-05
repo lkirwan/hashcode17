@@ -6,6 +6,8 @@ export class output {
     private caches: cache[];
 
     constructor(filename: string, caches: cache[]) {
+        this.caches = caches;
+
         let data = this.output();
         fs.appendFileSync(filename, data.join("\n"), { flag: "w+"});
     }
@@ -15,7 +17,7 @@ export class output {
 
         let outputLines:string[] = [cacheUsed.length.toString()];
         cacheUsed.forEach( (c) => {
-            let items = `${c.id}  ` + c.videos.map( (v) => { return v.id.toString(); }) .reduce( (a, b) => { return `${a} ${b}`; });
+            let items = `${c.id} ` + c.videos.map( (v) => { return v.id.toString(); }) .reduce( (a, b) => { return `${a} ${b}`; });
             outputLines.push(items);
         });
 

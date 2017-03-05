@@ -5,7 +5,7 @@ import { cache } from "./cache";
 import { input } from "./input";
 import { output } from "./output";
 
-const NAME = "trending_today";
+const NAME = "me_at_the_zoo";
 
 const INPUT_FILE_NAME = `./data/${NAME}.in`;
 const OUTPUT_FILE_NAME = `./data/${NAME}.out`;
@@ -24,6 +24,6 @@ alg.output();
 */
 
 let alg = new alg2(endpoints, videos, caches, cacheSize);
-let solution = alg.compute(50, 100);
+let solution = alg.compute(200, 50, 5);
 
- new output(OUTPUT_FILE_NAME, solution);
+new output(OUTPUT_FILE_NAME, solution);
