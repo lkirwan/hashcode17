@@ -36,12 +36,15 @@ export class alg2 {
       }
 
       private getRandomCache(cacheId: number, maxSize: number) : cache {
-        let newCache = new cache(cacheId, maxSize);
+        let remainingSpace: number = maxSize;
 
+        let newCache = new cache(cacheId, maxSize);
+        
         let videoId = this.getRandomVideoIdNoInList(newCache.videos);
         let chosenVideo = this.videos[videoId];
-
-        while (newCache.remainingSpace() >= chosenVideo.size) {
+        
+        while (remainingSpace >= chosenVideo.size) {
+          remainingSpace -= chosenVideo.size;
           newCache.videos.push(chosenVideo);
 
           // pick a New Video
@@ -107,7 +110,6 @@ export class alg2 {
             let cutTo = Math.floor(this.cachesCount * Math.random());
             let cutFrom = this.cachesCount - cutTo;
 
-
             let parent1 = parents[parentId1],
                 parent2 = parents[parentId2];
 
@@ -164,6 +166,8 @@ export class alg2 {
           });
 
           let videoLatencyGain = Math.max(0, ...videoLatencyGains);
+
+          // console.log("r: " + r.videoId + " " + videoLatencyGain);
 
           return videoLatencyGain * r.count;
         }).reduce( (a,b) => {
