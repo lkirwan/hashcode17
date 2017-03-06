@@ -22,7 +22,7 @@ export class alg2 {
         return Math.floor(Math.random() * this.videos.length);
       }
 
-      private getRandomVideoIdNoInList(videos: video[]) {
+      private getRandomVideoIdNotInList(videos: video[]) {
 
         let videoIds = videos.map( (v) => { return v.id;});
 
@@ -40,7 +40,7 @@ export class alg2 {
 
         let newCache = new cache(cacheId, maxSize);
 
-        let videoId = this.getRandomVideoIdNoInList(newCache.videos);
+        let videoId = this.getRandomVideoIdNotInList(newCache.videos);
         let chosenVideo = this.videos[videoId];
 
         while (remainingSpace >= chosenVideo.size) {
@@ -48,7 +48,7 @@ export class alg2 {
           newCache.videos.push(chosenVideo);
 
           // pick a New Video
-          videoId = this.getRandomVideoIdNoInList(newCache.videos);
+          videoId = this.getRandomVideoIdNotInList(newCache.videos);
           chosenVideo = this.videos[videoId];
         }
 
@@ -116,7 +116,7 @@ export class alg2 {
             let child1 = parent1.slice(0, cutFrom).concat(parent2.slice(cutFrom)),
                 child2 = parent2.slice(0, cutFrom).concat(parent1.slice(cutFrom));
 
-            if (mutation++ % 50 === mutationRate) {
+            if (mutation++ % mutationRate === 0) {
               let cache1IdMutated = Math.floor(Math.random() * child1.length);
               child1[cache1IdMutated] = this.getRandomCache(cache1IdMutated, this.cacheMaxSize);
 
